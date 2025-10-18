@@ -1,4 +1,3 @@
-````markdown
 # Simple Social Media Backend
 
 This is a backend application built with **Node.js** and **Express.js** that provides basic social media functionality, including user registration, login, post creation, and liking posts. It uses **MongoDB** for data storage.
