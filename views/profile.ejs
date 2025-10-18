@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Posts</title>
+    <link rel="stylesheet" href="/stylesheets/profile-styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <h1>📝 Your Blog Dashboard</h1>
+            <h1>Hello, <%= user.name %></h1>
+            <a href="/logout" class="logout-btn">Logout</a>
+        </div>
+
+        <!-- CREATE POST -->
+        <div class="create-post">
+            <h2>Create New Post</h2>
+            <form action="/post" method="POST">
+                <textarea name="content" placeholder="What's on your mind today?" required></textarea>
+                <input type="submit" class="submit-btn" value="Publish Post">
+            </form>
+        </div>
+
+        <!-- POSTS SECTION -->
+        <div class="posts">
+            <h3>Your Posts</h3>
+            <div class="post-grid">
+
+                <% if (user.post && user.post.length > 0) { %>
+                    <% user.post.slice().reverse().forEach(function(post){ %>
+                        <div class="post">
+                            <h3>@<%= user.username %></h3>
+                            <p><%= post.content %></p>
+                            <small><%= post.likes ? post.likes.length : 0 %> Like</small>
+                            
+                            <div >
+                                <a href="/like/<%= post._id %>">
+                                    <img width="20" src="/images/like-svgrepo-com.svg" alt="">
+                                    <%= post.likes && post.likes.indexOf(user._id) === -1 ? "Like" : "Unlike" %>
+                                </a>
+                                
+                                <a href="/update/<%= post._id %>">
+                                    <img  src="/images/edit-4-svgrepo-com.svg" alt="">
+                                    Edit</a>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>No posts yet — start writing something amazing!</p>
+                <% } %>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
